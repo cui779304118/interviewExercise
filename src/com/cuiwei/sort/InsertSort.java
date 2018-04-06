@@ -4,15 +4,14 @@ import java.util.Arrays;
 
 public class InsertSort {
 
-	public static void main(String[] args) {
-		int[] arr1 = new int[]{2,4,8,3,9,23,22,11,2,43,23123};
-		int[] arr2 = new int[]{2,4,8,3,9,23,22,11,2,43,23123};
-		insertSort(arr1);
-		shellSort(arr2);
-	}
-	
-	public static void insertSort(int[] arr){
-		Long st = System.currentTimeMillis();
+//	public static void main(String[] args) {
+//		int[] arr1 = new int[]{2,4,8,3,9,23,22,11,2,43,23123};
+//		int[] arr2 = new int[]{2,4,8,3,9,23,22,11,2,43,23123};
+//		insertSort(arr1);
+//		shellSort(arr2);
+//	}
+//	
+	public void insertSort(int[] arr){
 		for(int i=0; i< arr.length - 1; i++){
 			int value = arr[i + 1];
 			int j = i;
@@ -23,10 +22,8 @@ public class InsertSort {
 			arr[j+1] = value;
 			System.out.println("第【"+(i+1)+"】排序后的数组： " + Arrays.toString(arr));
 		}
-		Long en = System.currentTimeMillis();
-		System.out.println("【堆排序】总共耗时：" +(en-st) +"毫秒");
 	}
-	public static void shellSort(int[] arr){
+	public void shellSort(int[] arr){
 		Long st = System.currentTimeMillis();
 		int length = arr.length;
 		int gap = length/2;
@@ -44,7 +41,5 @@ public class InsertSort {
 			System.out.println("第【"+(num++)+"】排序后的数组： " + Arrays.toString(arr));
 			gap/=2;
 		}
-		Long en = System.currentTimeMillis();
-		System.out.println("【堆排序】总共耗时：" +(en-st) +"毫秒");
 	}
 }
