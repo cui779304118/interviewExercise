@@ -39,12 +39,13 @@ class Province implements Comparable<Province>{
 	}
 	
 	public int compareTo(Province other){
-		if(this.population > other.population){
-			return 1;
-		}else if(this.population < other.population){
-			return -1;
-		}else{
-			return 0;
-		}
+//		if(this.population > other.population){
+//			return 1;
+//		}else if(this.population < other.population){
+//			return -1;
+//		}else{
+//			return 0;
+//		}
+		return this.population - other.population;
 	}
 }
