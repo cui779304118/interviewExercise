@@ -1,6 +1,8 @@
 package com.cuiwei.offer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 寻找数组最大的或最小的n个数。
@@ -11,8 +13,9 @@ public class GetMaxAndLeastNumbers {
 
 	public static void main(String[] args) {
 		int [] arr = new int[]{1,3,2,8,4,9,0,7};
-		int [] result = getMaxNumbers(arr,5);
-		System.out.println(Arrays.toString(result));
+//		int [] result = getMaxNumbers(arr,8);
+//		System.out.println(Arrays.toString(result));
+		System.out.println(Arrays.toString(GetLeastNumbers_Solution(arr,8).toArray()));
 
 	}
 	//寻找最大的n个数。
@@ -33,7 +36,31 @@ public class GetMaxAndLeastNumbers {
 			}
 		}
 		System.arraycopy(arr, k+1, result, 0, n);
+		List resultList = Arrays.asList(arr);
+		System.out.println(resultList);
 		return result;
+	}
+
+	public static  ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
+		List<Integer> resultList = null;
+		if(null == input || input.length == 0){
+			return null;
+		}
+		int n = partion(input,0,input.length - 1);
+		while(n!=(k-1)){
+			if(n<k){
+				n = partion(input,n+1,input.length - 1);
+			}
+			if(n>k){
+				n = partion(input,0,n-1);
+			}
+		}
+		resultList = new ArrayList<>();
+		for(int i=0; i<k; i++){
+			resultList.add(input[i]);
+		}
+		return (ArrayList<Integer>)resultList;
+
 	}
 	//分区：左边比该数小，右边都比该数大
 	public static int partion(int[] arr, int st, int en){
