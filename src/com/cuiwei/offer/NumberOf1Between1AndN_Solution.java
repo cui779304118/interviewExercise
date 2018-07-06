@@ -11,7 +11,7 @@ package com.cuiwei.offer;
 public class NumberOf1Between1AndN_Solution {
 
     public static void main(String[] args) {
-        System.out.println(numberOf1(11));
+        System.out.println(numberOf_1(11));
     }
 
     public static int numberOf1(int num){
@@ -26,7 +26,7 @@ public class NumberOf1Between1AndN_Solution {
         int pown = (int) Math.pow(10,n-1);
         int maxFlag = pown * 2 -1;
         if (num < maxFlag){
-            tim1 = num - pown*firstNum + 1;
+            tim1 = num - pown + 1;
         }
         //当1在后几位时出现的次数，排列组合，后几位，每一位都可能为1，当该位为1时，其余几位，每一位都可以是0-9
         //因此公式为firstNum*(n-1)*10^(n-2)
@@ -34,6 +34,21 @@ public class NumberOf1Between1AndN_Solution {
 
         int nextNum = Integer.valueOf(numStr.substring(1));
         return tim1 + tim2 + numberOf1(nextNum);
+    }
+
+    public static int numberOf_1(int num){
+        String numStr = String.valueOf(num);
+        int n = numStr.length();
+        int sum = 0;
+        while(n > 1){
+            int pow1 = (int) Math.pow(10,n-1);
+            int tim1= num < 2*pow1 -1 ? num - pow1 + 1 : pow1;
+            sum += tim1 + num/pow1*(n-1)*(int) Math.pow(10,n-2);
+            n-=1;
+            num = num%pow1;
+        }
+        sum += num == 0 ? 0 : 1;
+        return sum;
     }
 
 }
