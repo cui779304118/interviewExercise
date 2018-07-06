@@ -27,7 +27,7 @@ public class LeftRotateString {
     }
 
     /**
-     * 最优解法，利用字符串翻转，假设字符串为abcdef，n=3，令X=abc,Y=def,
+     * 最优解法，利用字符串翻转，假设字符串为abcdef，n=3，令=abc,Y=def,
      * 先翻转X`= cba,Y`=fed,然后整体对X`Y`=cbafed翻转记得defabc
      * @param
      */
