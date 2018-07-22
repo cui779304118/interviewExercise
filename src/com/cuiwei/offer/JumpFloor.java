@@ -1,44 +1,66 @@
 package com.cuiwei.offer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JumpFloor {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int n=jumpFloor2(4);
-		System.out.println("×Ü¹²ÓĞ  "+n+" ÖÖÌø·¨£¡");
+    /**
+     * ä¸€åªé’è›™ä¸€æ¬¡å¯ä»¥è·³ä¸Š1çº§å°é˜¶ï¼Œä¹Ÿå¯ä»¥è·³ä¸Š2çº§ã€‚æ±‚è¯¥é’è›™è·³ä¸Šä¸€ä¸ªnçº§çš„å°é˜¶æ€»å…±æœ‰å¤šå°‘ç§è·³æ³•ï¼ˆå…ˆåæ¬¡åºä¸åŒç®—ä¸åŒçš„ç»“æœï¼‰ã€‚
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int n = jumpFloor3(10,new HashMap<>());
+        System.out.println(n);
 
-	}
-	/*¶ÔÓÚ±¾Ìâ,Ç°ÌáÖ»ÓĞ Ò»´Î 1½×»òÕß2½×µÄÌø·¨¡£
-	a.Èç¹ûÁ½ÖÖÌø·¨£¬1½×»òÕß2½×£¬ÄÇÃ´¼Ù¶¨µÚÒ»´ÎÌøµÄÊÇÒ»½×£¬ÄÇÃ´Ê£ÏÂµÄÊÇn-1¸öÌ¨½×£¬Ìø·¨ÊÇf(n-1);
-	b.¼Ù¶¨µÚÒ»´ÎÌøµÄÊÇ2½×£¬ÄÇÃ´Ê£ÏÂµÄÊÇn-2¸öÌ¨½×£¬Ìø·¨ÊÇf(n-2)
-	c.ÓÉa\b¼ÙÉè¿ÉÒÔµÃ³ö×ÜÌø·¨Îª: f(n) = f(n-1) + f(n-2) 
-	d.È»ºóÍ¨¹ıÊµ¼ÊµÄÇé¿ö¿ÉÒÔµÃ³ö£ºÖ»ÓĞÒ»½×µÄÊ±ºò f(1) = 1 ,Ö»ÓĞÁ½½×µÄÊ±ºò¿ÉÒÔÓĞ f(2) = 2
-	e.¿ÉÒÔ·¢ÏÖ×îÖÕµÃ³öµÄÊÇÒ»¸öì³²¨ÄÇÆõÊıÁĞ£º
-	        
-	              | 1, (n=1)
-	f(n) =     | 2, (n=2)
-	              | f(n-1)+f(n-2) ,(n>2,nÎªÕûÊı)*/
-	
-	public static int jumpFloor(int n){
-		int one=1;
-		int two=2;
-		int three=0;
-		if(n<=0)return 0; 
-		if(n==1)return one;
-		if(n==2)return two;
-		for(int i=3;i<=n;i++){
-			three=one+two;
-			one=two;
-			two=three;
-		}
-		return three;
-	}
-	
-	public static int jumpFloor2(int n){
-		if(n<=0)return 0; 
-		if(n==1)return 1;
-		if(n==2)return 2;
-		return jumpFloor2(n-1)+jumpFloor2(n-2);
-	}
+    }
+
+    /**
+     * æ—¶é—´å¤æ‚åº¦ä½ï¼Œæ•ˆç‡é«˜
+     *
+     * @param n
+     * @return
+     */
+    public static int jumpFloor(int n) {
+        int one = 1;
+        int two = 2;
+        int three = 0;
+        if (n <= 0) return 0;
+        if (n == 1) return one;
+        if (n == 2) return two;
+        for (int i = 3; i <= n; i++) {
+            three = one + two;
+            one = two;
+            two = three;
+        }
+        return three;
+    }
+
+    /**
+     * æ—¶é—´å¤æ‚åº¦é«˜
+     *
+     * @param n
+     * @return
+     */
+    public static int jumpFloor2(int n) {
+        if (n <= 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        return jumpFloor2(n - 1) + jumpFloor2(n - 2);
+    }
+
+    public static int jumpFloor3(int n, Map<Integer, Integer> map) {
+        if (n <= 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        if (map.containsKey(n)) {
+            return map.get(n);
+        } else {
+            int value = jumpFloor3(n - 1, map) + jumpFloor3(n - 2, map);
+            map.put(n, value);
+            return value;
+        }
+    }
 
 }
