@@ -221,11 +221,11 @@ public class AboutList {
 //	}
 }
 
-class ListNode{
-	int val;
-	ListNode next = null;
-	
-	ListNode(int val){
-		this.val = val;
-	}
-}
+//class ListNode{
+//	int val;
+//	ListNode next = null;
+//
+//	ListNode(int val){
+//		this.val = val;
+//	}
+//}
