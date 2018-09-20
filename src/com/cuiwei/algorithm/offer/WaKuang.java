@@ -19,17 +19,17 @@ public class WaKuang {
     public static int waKuang(int n, int w, int[] g, int[] p) {
         int[] preResults = new int[w];
         int[] results = new int[w];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <w; i++) {
             if (i < p[0]) {
-                preResults[i] = 0;
+                preResults[i ] = 0;
             } else {
                 preResults[i] = g[0];
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < w; j++) {
-                if (j < p[i]){
+        for (int i = 0; i < n; i++) {//遍历金矿
+            for (int j = 1; j <w; j++) {//遍历人数
+                if (j < p[i]){//如果当前人数小于当前金矿需要的人数
                     results[j] = preResults[j];
                 }else{
                     results[j] = Math.max(preResults[j],preResults[j-p[i]] + g[i]);
@@ -37,7 +37,7 @@ public class WaKuang {
                 preResults = results;
             }
         }
-        return results[n];
+        return results[w-1];
     }
 
     public static void main(String[] args) {

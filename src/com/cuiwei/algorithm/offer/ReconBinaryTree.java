@@ -16,25 +16,24 @@ public class ReconBinaryTree {
 		}
 	}
 
-	@Test
-	public void main() {
+	public static void main(String args[]) {
 		// TODO Auto-generated method stub
 		int [] pre={1,2,4,7,3,5,6,8};
 		int [] in={4,7,2,1,5,3,8,6};
 		TreeNode root=reConstructBinaryTree(pre,in);
-		System.out.println("ǰ������Ľ���� ");
+		System.out.println("前序遍历结果 ");
 		prePrint(root);
-		System.out.println("\n��������Ľ���� ");
+		System.out.println("\n中序遍历结果 ");
 		inPrint(root);
 
 	}
 	
-	public TreeNode reConstructBinaryTree(int [] pre,int [] in){
+	public static TreeNode reConstructBinaryTree(int [] pre,int [] in){
 		TreeNode root=re(pre,0,pre.length-1,in,0,in.length-1);
 		return root;
 	}
 	
-	private TreeNode re(int[] pre,int sp,int ep,int [] in,int si,int ei){
+	private static TreeNode re(int[] pre,int sp,int ep,int [] in,int si,int ei){
 		if(sp>ep||si>ei){
 			return null;
 		}
@@ -49,7 +48,7 @@ public class ReconBinaryTree {
 		return root;
 	}
 	
-	public void prePrint(TreeNode root){
+	public static void prePrint(TreeNode root){
 		if(root==null){
 			return;
 		}else{
@@ -60,7 +59,7 @@ public class ReconBinaryTree {
 		
 	}
 	
-	public void inPrint(TreeNode root){
+	public static void inPrint(TreeNode root){
 		if(root==null){
 			return;
 		}else{

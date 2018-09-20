@@ -1,12 +1,7 @@
 package com.cuiwei.algorithm.offer;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class BinaryFindTree {
 	static class TreeNode{
@@ -27,25 +22,28 @@ public class BinaryFindTree {
 		for(int i=0;i<nodeArr.length;i++){
 			nodeList.add(nodeArr[i]);
 		}
-		BinaryFindTree tree = new BinaryFindTree();
-		tree.createTree(nodeList);
+//		BinaryFindTree tree = new BinaryFindTree();
+//		tree.createTree(nodeList);
 //		tree.preTravels(tree.root);
 //		tree.midTravels(tree.root);
 //		tree.aftTravels(tree.root);
 //		tree.preTravelsByStack(tree.root);
 //		tree.midTravelsByStack(tree.root);
 //		tree.aftTravelsByStack(tree.root);
-		tree.layerTravels(tree.root);
-		System.out.println("二叉树的宽度为： " + tree.getTheWidthOfTree(tree.root));
-		System.out.println("二叉树的深度为： " + tree.getMaxDepth(tree.root));
-		for(int ele : tree.nodeList){
-			System.out.print(ele + " ");
-		}
+//		tree.layerTravels(tree.root);
+//		System.out.println("二叉树的宽度为： " + tree.getTheWidthOfTree(tree.root));
+//		System.out.println("二叉树的深度为： " + tree.getMaxDepth(tree.root));
+//		for(int ele : tree.nodeList){
+//			System.out.print(ele + " ");
+//		}
 //		System.out.println("\n");
 //		TreeNode findNode = tree.findKey(0);
 //		System.out.println(findNode.element);
 //		TreeNode minNode = tree.getMinNode(tree.root);
 //		System.out.println(minNode.element);
+		int[] clone = nodeArr.clone();
+		System.out.println(Arrays.toString(clone));
+
 	}
 	
 	TreeNode root;
@@ -192,14 +190,21 @@ public class BinaryFindTree {
 	
 	//层序遍历
 	public void layerTravels(TreeNode root){
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		TreeNode current = root;
-		queue.add(current);
+		if(root == null) return;
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		int lastWidth = 1;
+		TreeNode cur = root;
 		while(!queue.isEmpty()){
-			TreeNode node = queue.poll();
-			nodeList.add(node.element);
-			if(node.left != null)queue.add(node.left);
-			if(node.right !=null)queue.add(node.right);
+			while(lastWidth > 0){
+				cur = queue.poll();
+				System.out.print(cur.element + " ");
+				if(cur.left != null) queue.add(cur.left);
+				if(cur.right != null) queue.add(cur.right);
+				lastWidth--;
+			}
+			lastWidth = queue.size();
+			System.out.print("% ");
 		}
 	}
 	
@@ -256,4 +261,5 @@ public class BinaryFindTree {
 		}
 		return parent;
 	}
+
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * created by cuiwei on 2018/7/27
  * 假设：
- *Knapsack Max weight : W = 10 (units)
+ * Knapsack Max weight : W = 10 (units)
  * Total items         : N = 4
  * Values of items     : v[] = {10, 40, 30, 50}
  * Weight of items     : w[] = {5, 4, 6, 3}
@@ -14,26 +14,6 @@ import java.util.Arrays;
  * i > 0时，p(i) = max{w(i - w[j]) + v[j]}
  */
 public class BagProblem {
-    public int maxPrice(int cap,int[] v,int[] w){
-        int len = v.length;
-        int[] tmpPrice = new int[cap+1];
-        for (int i = 0; i <= cap ; i++) {
-            if (i == 0){
-                tmpPrice[i] = 0;
-                continue;
-            }
-            int max = -1;
-            for (int j = 0; j < len; j++) {
-                int curPrice;
-                if (i >= w[j] && (curPrice = tmpPrice[i - w[j]] + v[j]) > max ){
-                    max = curPrice;
-                }
-            }
-            tmpPrice[i] = max;
-        }
-        System.out.println(Arrays.toString(tmpPrice));
-        return tmpPrice[cap];
-    }
 
     public int knapsack(int val[], int wt[], int W) {
         //Get the total number of items.
@@ -56,23 +36,22 @@ public class BagProblem {
             V[row][0] = 0;
         }
 
-        for (int item=1;item<=N;item++){
+        for (int item = 1; item <= N; item++) {
             //Let's fill the values row by row
-            for (int weight=1;weight<=W;weight++){
+            for (int weight = 1; weight <= W; weight++) {
                 //Is the current items weight less
                 //than or equal to running weight
-                if (wt[item-1]<=weight){
+                if (wt[item - 1] <= weight) {
                     //Given a weight, check if the value of the current
                     //item + value of the item that we could afford
                     //with the remaining weight is greater than the value
                     //without the current item itself
-                    V[item][weight]=Math.max (val[item-1]+V[item-1][weight-wt[item-1]], V[item-1][weight]);
-                }
-                else {
+                    V[item][weight] = Math.max(val[item - 1] + V[item - 1][weight - wt[item - 1]], V[item - 1][weight]);
+                } else {
                     //If the current item's weight is more than the
                     //running weight, just carry forward the value
                     //without the current item
-                    V[item][weight]=V[item-1][weight];
+                    V[item][weight] = V[item - 1][weight];
                 }
             }
 
@@ -89,12 +68,36 @@ public class BagProblem {
         return V[N][W];
     }
 
+    //p为每个金矿需要人数，g为每个金矿的金子数，n为总人数
+    public int max_gold(int[] p, int[] g, int n) {
+        if (p == null || g == null || n < 0) return 0;
+        int[] last = new int[n + 1];
+        int[] cur = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            last[i] = i >= p[0] ? g[0] : 0;
+        }
+
+        System.out.println(Arrays.toString(last));
+        for (int i = 1; i < p.length; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (j >= p[i]) {
+                    cur[j] = Math.max(last[j], last[j - p[i]] + g[i]);
+                } else {
+                    cur[j] = last[j];
+                }
+            }
+            last = cur;
+            System.out.println(Arrays.toString(cur));
+        }
+        return cur[n];
+    }
+
     public static void main(String[] args) {
         BagProblem bag = new BagProblem();
-        int[] v = {10, 40, 30, 50};
-        int[] w = {5, 4, 6, 3};
-        System.out.println(bag.maxPrice(10,v,w));
-        System.out.println(bag.knapsack(v,w,10));
+        int[] p = {5, 5,3, 4, 3};
+        int[] g = {400,500, 200, 300, 350 };
+        bag.max_gold(p, g, 10);
     }
 
 }

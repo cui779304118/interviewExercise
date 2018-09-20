@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+public class TheDepthAndWidthOfTree {
+
 class TreeNode{
     int val;
     TreeNode left;
@@ -12,8 +14,6 @@ class TreeNode{
         this.val = val;
     }
 }
-public class TheDepthAndWidthOfTree {
-
     public TreeNode createRoot(List<Integer> list){
         TreeNode root = null;
         for (Integer val : list){

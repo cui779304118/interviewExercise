@@ -13,8 +13,8 @@ public class SelectionSort {
             return;
         }
         for (int i = 0; i < arr.length - 1; i++) {
+            int t = arr[i];
             for (int j = i+1; j < arr.length; j++) {
-                int t = arr[i];
                 if (arr[j] < t){
                     arr[i] = arr[j];
                     arr[j] = t;

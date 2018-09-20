@@ -1,4 +1,4 @@
-package com.cuiwei.offer;
+package com.cuiwei.algorithm.offer;
 
 
 /**
@@ -7,7 +7,6 @@ package com.cuiwei.offer;
  * 注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
  */
 public class GetNextLinkNode {
-
     private class TreeLinkNode {
         int val;
         TreeLinkNode left = null;
@@ -42,5 +41,4 @@ public class GetNextLinkNode {
             return parent;
         }
     }
-
 }

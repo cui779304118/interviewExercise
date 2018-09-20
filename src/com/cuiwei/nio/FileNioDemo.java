@@ -19,7 +19,7 @@ import java.nio.channels.FileChannel;
  * 6. 缓冲区数据写入通道中
  * 7. 关闭资源
  */
-public class NioDemo {
+public class FileNioDemo {
 
     public static void copyFile(String file1, String file2) {
         try {
