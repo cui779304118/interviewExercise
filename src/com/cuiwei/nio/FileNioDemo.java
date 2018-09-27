@@ -26,29 +26,28 @@ public class FileNioDemo {
             RandomAccessFile fromFile = new RandomAccessFile(file1, "rw");
             RandomAccessFile toFile = new RandomAccessFile(file2, "rw");
 
-            //获取Channel
+            //获取Channel，通道
             FileChannel fromChannel = fromFile.getChannel();
             FileChannel toChannel = toFile.getChannel();
 
-            //定义缓冲区大小
+            //定义缓冲区大小，4k
             int bufSize = 1024 * 4;
-
             //定义缓冲
             ByteBuffer byteBuffer = ByteBuffer.allocate(bufSize);
 
             int len = 0;
-
             //将数据从源channel写入到缓冲区
             while ((len = fromChannel.read(byteBuffer)) != -1) {
 
                 //切换到读模式
                 byteBuffer.flip();
-
                 //读取缓冲区数据到目标channel
                 toChannel.write(byteBuffer);
 
-                //清空缓冲
-                byteBuffer.clear();
+//                //清空缓冲
+//                byteBuffer.clear();
+                //切换到写模式,与clear()，功能类似
+                byteBuffer.flip();
             }
 
             //释放资源
@@ -63,8 +62,8 @@ public class FileNioDemo {
     }
 
     public static void main(String[] args) {
-        copyFile("C:\\Users\\Lebron\\Desktop\\bookAppointment.sql",
-                "C:\\Users\\Lebron\\Desktop\\book.sql");
+        copyFile("C:\\Users\\Lebron\\Desktop\\面经整理.txt",
+                "C:\\Users\\Lebron\\Desktop\\面经整理_copy.txt");
         System.out.println("复制完成！");
     }
 }

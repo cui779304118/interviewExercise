@@ -15,7 +15,7 @@ public class GetMaxAndLeastNumbers {
         int[] arr = new int[]{1, 8, 2, 3, 4, 9, 0, 7};
 //		int [] result = getMaxNumbers(arr,8);
 //		System.out.println(Arrays.toString(result));
-        System.out.println(Arrays.toString(getTopkByPartion(arr, 4).toArray()));
+        System.out.println(Arrays.toString(getTopkByPartion(arr, 2).toArray()));
 
     }
 
@@ -146,24 +146,38 @@ public class GetMaxAndLeastNumbers {
     }
 
     private static int partion2(int[] array, int st, int en) {
-        int flag = array[st];
+        int flag = median3(array,st,en);
+        int last = en;
+        en--;
         while (st < en) {
+            while (st < en && array[st] < flag) {
+                st++;
+            }
             while (st < en && array[en] > flag) {
                 en--;
             }
             if (st < en) {
                 swap(array, st, en);
-                st++;
-            }
-            while (st < en && array[st] < flag) {
-                st++;
-            }
-            if (st < en) {
-                swap(array, st, en);
-                en--;
             }
         }
+        swap(array,st,last);
         return st;
+    }
+
+    private static int median3(int[] array,int st,int en){
+        int mid = (st + en) >> 1;
+        if (array[st] < array[mid]){
+            swap(array,st,mid);
+        }
+        if (array[st] > array[en]){
+            swap(array,st,en);
+        }
+        if (array[st] > array[mid]){
+            swap(array,st,mid);
+        }
+        System.out.println(Arrays.toString(array) + " " + array[mid]);
+        swap(array,mid,en);
+        return array[en];
     }
 
 

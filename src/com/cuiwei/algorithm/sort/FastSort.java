@@ -60,20 +60,21 @@ public class FastSort {
         return st;
     }
 
-    private int median3(int[] arrs,int st,int en){
+    private int median3(int[] array,int st,int en){
         int median = (st + en) >> 1;
-        if (arrs[st] < arrs[median]){
-            swap(arrs,st,median);
+        int mid = (st + en) >> 1;
+        if (array[st] < array[mid]){
+            swap(array,st,mid);
         }
-        if (arrs[st] > arrs[en]){
-            swap(arrs,st,en);
+        if (array[st] > array[en]){
+            swap(array,st,en);
         }
-        if (arrs[median] > arrs[en] ){
-            swap(arrs,en,median);
+        if (array[st] > array[mid]){
+            swap(array,st,mid);
         }
-        swap(arrs,median,en);//将median指向的元素与最后一个元素交换
-        System.out.println("中序：" + Arrays.toString(arrs));
-        return arrs[en];
+        System.out.println("中序：" + Arrays.toString(array));
+        swap(array,median,en);//将median指向的元素与最后一个元素交换
+        return array[en];
     }
 
     private void swap(int[] arrs,int i,int j){
